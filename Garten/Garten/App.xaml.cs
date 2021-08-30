@@ -19,7 +19,7 @@ namespace Garten
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -27,10 +27,19 @@ namespace Garten
             containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<MyPosts, MyPostsViewModel>();
             containerRegistry.RegisterForNavigation<Posts, PostsViewModel>();
             containerRegistry.RegisterForNavigation<MyPostDetail, MyPostDetailViewModel>();
+            containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
+            
+            containerRegistry.RegisterForNavigation<Search, SearchViewModel>();
+            containerRegistry.RegisterForNavigation<AddPost, AddPostViewModel>();
+            containerRegistry.RegisterForNavigation<Messages, MessagesViewModel>();
+            containerRegistry.RegisterForNavigation<Account, AccountViewModel>();
+            containerRegistry.RegisterForNavigation<Messages, MessagesViewModel>();
+            containerRegistry.RegisterForNavigation<Account, AccountViewModel>();
         }
     }
 }

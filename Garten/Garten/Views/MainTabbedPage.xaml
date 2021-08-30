@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            xmlns:local="clr-namespace:Garten.Views"
+            android:TabbedPage.BarItemColor ="Gray"
+            android:TabbedPage.BarSelectedItemColor ="#5DBA63"
+            
+            x:Class="Garten.Views.MainTabbedPage">
+
+    
+    <local:Home  Title="Home"   IconImageSource="baseline_home_black_24.png" />
+    <local:Search Title="Search"  IconImageSource="baseline_search_black_24"/>
+    <!--<local:MainPage  IconImageSource="{OnPlatform  Android=baseline_add_circle_24}" />-->
+    <local:AddPost  Title="Add" IconImageSource="baseline_add_circle_black_48.png" />
+    <local:Messages Title="Messages" IconImageSource="baseline_question_answer_black_24"/>
+    <local:Account Title="Account" IconImageSource="baseline_person_black_24"/>
+  
+
+</TabbedPage>
