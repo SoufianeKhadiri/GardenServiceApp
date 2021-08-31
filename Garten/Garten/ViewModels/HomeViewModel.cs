@@ -66,7 +66,7 @@ namespace Garten.ViewModels
             set { SetProperty(ref _Posts, value); }
         }
 
-        public DelegateCommand ShowAllMyPosts { get; set; }
+        public static DelegateCommand ShowAllMyPosts { get; set; }
         public DelegateCommand ShowAllPosts { get; set; }
         IEventAggregator _ea;
         INavigationService NavigationService;

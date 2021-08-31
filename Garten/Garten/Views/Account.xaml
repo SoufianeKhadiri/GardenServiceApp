@@ -18,6 +18,7 @@
 
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
 
         </Grid.RowDefinitions>
 
@@ -39,16 +40,25 @@
         <BoxView  Grid.Row="3" Style="{StaticResource Separator}" />
         <!--myPosts-->
         
-        <StackLayout  Grid.Row="4" HeightRequest="50" Orientation="Horizontal" Margin="10">
+        <StackLayout  Grid.Row="4" HeightRequest="40" Orientation="Horizontal" Margin="10,10,10,0">
             <ffimageloadingsvg:SvgCachedImage HeightRequest="35" Source="posts.svg"/>
             <Label Text="My posts" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"  Margin="10,0,0,0"/>
+
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding GoToMyPosts}"/>
+            </StackLayout.GestureRecognizers>
+
+        </StackLayout>
+        <StackLayout  Grid.Row="5" HeightRequest="40" Orientation="Horizontal" Margin="10,7">
+            <ffimageloadingsvg:SvgCachedImage HeightRequest="35" Source="accountSetting.svg" />
+            <Label Text="Profile setting" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"  Margin="10,0,0,0"/>
 
             <StackLayout.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding MyPosts}"/>
             </StackLayout.GestureRecognizers>
 
         </StackLayout>
-        <StackLayout  Grid.Row="5" HeightRequest="50" Orientation="Horizontal" Margin="10">
+        <StackLayout  Grid.Row="6" HeightRequest="40" Orientation="Horizontal" Margin="10,7">
             <ffimageloadingsvg:SvgCachedImage HeightRequest="35" Source="logout.svg"/>
             <Label Text="Logout" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"  Margin="10,0,0,0"/>
             
@@ -57,6 +67,7 @@
             </StackLayout.GestureRecognizers>
 
         </StackLayout>
+       
 
     </Grid>
 </ContentPage>

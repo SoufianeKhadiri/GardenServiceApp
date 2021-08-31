@@ -40,6 +40,7 @@ namespace Garten
             containerRegistry.RegisterForNavigation<Account, AccountViewModel>();
             containerRegistry.RegisterForNavigation<Messages, MessagesViewModel>();
             containerRegistry.RegisterForNavigation<Account, AccountViewModel>();
+            containerRegistry.RegisterForNavigation<ImagePopup, ImagePopupViewModel>();
         }
     }
 }

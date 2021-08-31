@@ -2,7 +2,78 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:flv="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Garten.Views.AddPost">
-  
+             x:Class="Garten.Views.AddPost"
+            
+        xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+        xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             >
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <ffimageloadingsvg:SvgCachedImage Source="{Binding ImgSource}" Grid.Row="0" HeightRequest="250" Aspect="Fill">
+            <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TakeFoto}" />
+            </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+        </ffimageloadingsvg:SvgCachedImage>
+        <ffimageloadingsvg:SvgCachedImage Margin="10" IsVisible="{Binding DeleteFotoVisibility}"  Source="delete.svg" Grid.Row="0" HeightRequest="20" VerticalOptions="EndAndExpand" HorizontalOptions="EndAndExpand">
+            <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding DeleteFoto}" />
+            </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+        </ffimageloadingsvg:SvgCachedImage>
+        
+
+
+
+        <StackLayout Orientation="Horizontal" Grid.Row="1" Margin="10,0">
+            <CollectionView   ItemsSource="{Binding Images}" SelectionMode="Single" SelectedItem="{Binding Image}"
+                          Margin="0,0,10,0"  HeightRequest="80"
+                        >
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" VerticalItemSpacing="20"  />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Grid >
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <StackLayout>
+                                <Frame CornerRadius="10"  Padding="0" IsClippedToBounds="True" 
+                                       HeightRequest="80" WidthRequest="80" Margin="2">
+                                    <Image Aspect="AspectFill" Source="{Binding Source}" />
+                                </Frame>
+                           
+                            </StackLayout>
+
+                        </Grid>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+            <ffimageloadingsvg:SvgCachedImage Source="add.svg" HeightRequest="30"   HorizontalOptions="EndAndExpand" >
+                <ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TakeFoto}" />
+                </ffimageloadingsvg:SvgCachedImage.GestureRecognizers>
+            </ffimageloadingsvg:SvgCachedImage>
+        </StackLayout>
+
+
+
+    </Grid>
 </ContentPage>

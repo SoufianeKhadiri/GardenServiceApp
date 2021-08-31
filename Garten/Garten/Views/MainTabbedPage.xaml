@@ -8,7 +8,8 @@
             xmlns:local="clr-namespace:Garten.Views"
             android:TabbedPage.BarItemColor ="Gray"
             android:TabbedPage.BarSelectedItemColor ="#5DBA63"
-            
+            android:TabbedPage.IsSwipePagingEnabled="False"
+            android:TabbedPage.IsSmoothScrollEnabled="False"
             x:Class="Garten.Views.MainTabbedPage">
 
     
