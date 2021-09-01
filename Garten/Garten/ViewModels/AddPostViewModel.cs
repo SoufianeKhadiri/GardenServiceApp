@@ -4,6 +4,7 @@ using Plugin.Media;
 using Plugin.Media.Abstractions;
 using Prism;
 using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -19,12 +20,14 @@ namespace Garten.ViewModels
     public class AddPostViewModel : BindableBase
     {
         //ctor
-        public AddPostViewModel()
+        public AddPostViewModel(IEventAggregator ea)
         {
-            
+            ea.GetEvent<TakeFoto>().Subscribe(TakeFotoFromCamera);
+            ea.GetEvent<TakeFotoGalery>().Subscribe(TakeFotoFromGalery);
             Images = new ObservableCollection<MyImage>();
             ImgSource = "addImage.svg";
             DeleteFotoVisibility = false;
+
 
 
         }
@@ -62,7 +65,7 @@ namespace Garten.ViewModels
         }
 
         private ObservableCollection<MyImage> _Images;
-        public  ObservableCollection<MyImage> Images
+        public ObservableCollection<MyImage> Images
         {
             get { return _Images; }
             set { SetProperty(ref _Images, value); }
@@ -86,37 +89,71 @@ namespace Garten.ViewModels
         public DelegateCommand TakeFoto =>
         _TakeFoto ?? (_TakeFoto = new DelegateCommand(TakeFotoM));
 
-          void TakeFotoM()
+        void TakeFotoM()
         {
-             PopupNavigation.Instance.PushAsync(new ImagePopup());
+            PopupNavigation.Instance.PushAsync(new ImagePopup());
+
         }
 
 
-        async void TakeFotoFromCamera()
+        public async void TakeFotoFromCamera(bool obj)
         {
-            try
+            if (obj == true)
             {
-                var photo = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
+                try
                 {
-                    DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Rear,
+                    var photo = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions()
+                    {
+                        DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Rear,
 
-                    PhotoSize = PhotoSize.Small,
-                    Directory = "Xamarin",
-                    SaveToAlbum = true
-                });
-                if (photo != null)
+                        PhotoSize = PhotoSize.Small,
+                        Directory = "Xamarin",
+                        SaveToAlbum = true
+                    });
+                    if (photo != null)
+                    {
+
+                        var src = ImageSource.FromStream(() => { return photo.GetStream(); });
+                        var path = photo.AlbumPath;
+                        MyImage img = new MyImage { Source = src, FilePath = path };
+                        Images.Add(img);
+
+                    }
+                }
+                catch (Exception ex)
                 {
+                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message.ToString(), "ok");
 
-                    var src = ImageSource.FromStream(() => { return photo.GetStream(); });
-                    var path = photo.AlbumPath;
-                    MyImage img = new MyImage { Source = src, FilePath = path };
-                    Images.Add(img);
                 }
             }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", ex.Message.ToString(), "ok");
+        }
 
+        public async void TakeFotoFromGalery(bool obj)
+        {
+            if (obj == true)
+            {
+                try
+                {
+                    var photo = await Plugin.Media.CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions()
+                    {
+                        PhotoSize = PhotoSize.Small
+                       
+                     });
+                    if (photo != null)
+                    {
+
+                        var src = ImageSource.FromStream(() => { return photo.GetStream(); });
+                        var path = photo.AlbumPath;
+                        MyImage img = new MyImage { Source = src, FilePath = path };
+                        Images.Add(img);
+
+                    }
+                }
+                catch (Exception ex)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", ex.Message.ToString(), "ok");
+
+                }
             }
         }
     }

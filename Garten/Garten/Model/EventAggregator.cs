@@ -10,4 +10,7 @@ namespace Garten.Model
     {
     }
     public class SendMyPosts : PubSubEvent<ObservableCollection<Post>> { }
+
+    public class TakeFoto : PubSubEvent<bool> { }
+    public class TakeFotoGalery : PubSubEvent<bool> { }
 }

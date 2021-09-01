@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Prism.Commands;
+using Xamarin.Forms;
 
 namespace Garten.Views
 {
@@ -8,6 +9,9 @@ namespace Garten.Views
         {
             InitializeComponent();
         }
+
+        
+        
 
     }
 }
