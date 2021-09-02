@@ -67,8 +67,8 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <StackLayout>
-                                <Frame CornerRadius="10"  Padding="0" IsClippedToBounds="True" HeightRequest="80">
-                                    <Image Aspect="AspectFill" Source="{Binding image}" />
+                                <Frame CornerRadius="10"  Padding="0" IsClippedToBounds="True" HeightRequest="80" WidthRequest="80">
+                                    <Image Aspect="AspectFill" Source="{Binding Images[0]}"  />
                                 </Frame>
                                 <Label Text="{Binding Titel}" />
                             </StackLayout>
@@ -120,7 +120,7 @@
                             </Grid.ColumnDefinitions>
 
                             <Frame CornerRadius="10" Margin="0" Padding="0" IsClippedToBounds="True" HeightRequest="150" WidthRequest="150">
-                                <Image Aspect="AspectFill" Source="{Binding image}" />
+                                <Image Aspect="AspectFill" Source="{Binding Images[0]}"/>
                             </Frame>
                             <StackLayout Grid.Column="1">
                                 <Label Text="{Binding Titel}" />

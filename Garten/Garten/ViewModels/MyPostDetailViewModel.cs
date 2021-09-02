@@ -15,12 +15,7 @@ namespace Garten.ViewModels
         #region Post props
 
 
-        private string _Image;
-        public string Image
-        {
-            get { return _Image; }
-            set { SetProperty(ref _Image, value); }
-        }
+       
 
         private string _Titel;
         public string Titel
@@ -35,6 +30,40 @@ namespace Garten.ViewModels
             get { return _Price; }
             set { SetProperty(ref _Price, value); }
         }
+
+
+        private string _Description;
+        public string Description
+        {
+            get { return _Description; }
+            set { SetProperty(ref _Description, value); }
+        }
+
+
+        private string _Category;
+        public string Category
+        {
+            get { return _Category; }
+            set { SetProperty(ref _Category, value); }
+        }
+
+
+        private string _Time;
+        public string Time
+        {
+            get { return _Time; }
+            set { SetProperty(ref _Time, value); }
+        }
+
+
+        private List<string> _Images;
+        public List<string> Images
+        {
+            get { return _Images; }
+            set { SetProperty(ref _Images, value); }
+        }
+
+        
         #endregion
 
 
@@ -54,7 +83,7 @@ namespace Garten.ViewModels
         {
             _nav = navigationService;
             Back = new DelegateCommand(BackM);
-          
+            
         }
 
         private async void BackM()
@@ -78,7 +107,10 @@ namespace Garten.ViewModels
 
         private void FillPostData()
         {
-            Image = PostDetail.image;
+            Images = new List<string>();
+            Images = PostDetail.Images;
+            Description = PostDetail.Description;
+
             Titel = PostDetail.Titel;
             Price = PostDetail.Price.ToString();
         }

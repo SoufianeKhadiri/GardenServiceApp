@@ -68,6 +68,15 @@
     <PackageReference Include="DLToolkit.Forms.Controls.FlowListView">
       <Version>2.0.11</Version>
     </PackageReference>
+    <PackageReference Include="FirebaseDatabase.net">
+      <Version>4.0.6</Version>
+    </PackageReference>
+    <PackageReference Include="FirebaseStorage.net">
+      <Version>1.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Refractored.MvvmHelpers">
+      <Version>1.6.2</Version>
+    </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>2.0.0.12</Version>
     </PackageReference>
@@ -79,6 +88,10 @@
     <PackageReference Include="Prism.DryIoc.Forms" Version="8.0.0.1909" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ControlRenderer\BorderLessEditorRenderer.cs" />
+    <Compile Include="ControlRenderer\BorderlessEntryRenderer.cs" />
+    <Compile Include="ControlRenderer\BorderlessPickerRenderer.cs" />
+    <Compile Include="DroidTouchListener.cs" />
     <Compile Include="MainApplication.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Renderers\CustomFrameRenderer.cs" />

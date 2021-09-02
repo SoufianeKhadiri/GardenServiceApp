@@ -1,5 +1,6 @@
 ﻿using Garten.Interface;
 using Garten.Model;
+using Garten.Services;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -73,42 +74,51 @@ namespace Garten.ViewModels
         public HomeViewModel(INavigationService navigationService )
         {
             NavigationService = navigationService;
+            getPostsData();
+            
+            //Posts = new ObservableCollection<Post>
+            //{
+            //    new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
+            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
+            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
+            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
 
-            Posts = new ObservableCollection<Post>
-            {
-                new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-                 new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-                new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-                new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-
-            };
+            //};
 
             PostsNumber = Posts.Count().ToString();
             ShowAllMyPosts = new DelegateCommand(ShowMyPosts);
             ShowAllPosts = new DelegateCommand(ShowPosts);
+
+        }
+
+        private void getPostsData()
+        {
+            PostService ps = new PostService();
+            Posts = new ObservableCollection<Post>();
+            Posts = ps.getPosts();
 
         }
 

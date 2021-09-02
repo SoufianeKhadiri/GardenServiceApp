@@ -21,10 +21,20 @@
         </Grid.RowDefinitions>
         <pancake:PancakeView  CornerRadius="0,0,40,40" Padding="0"
                          IsClippedToBounds="True" HeightRequest="320" >
-            <Image Source="{Binding Image}" Aspect="AspectFill" />
-        </pancake:PancakeView>
+           
         
-        <ffimageloadingsvg:SvgCachedImage  Margin="10" IsVisible="true" Source="back.svg"
+            <CarouselView ItemsSource="{Binding Images}" IndicatorView="Indicator" >
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding}" Aspect="AspectFill"/>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            </pancake:PancakeView>
+            <IndicatorView x:Name="Indicator" IndicatorColor="LightGray" Margin="0,10"
+                           SelectedIndicatorColor="Black" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+            
+            <ffimageloadingsvg:SvgCachedImage  Margin="10" IsVisible="true" Source="back.svg"
                    BackgroundColor="transparent" WidthRequest="20" HeightRequest="20"
                 HorizontalOptions="Start" VerticalOptions="Start"
                 >
@@ -43,9 +53,7 @@
             <Label   Text="{Binding Price}"  FontAttributes="Bold" FontSize="Large" TextColor="Black"/>
         </StackLayout>
         <!--description-->
-        <Label Margin="10" Grid.Row="2" Text="s simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen 
-               book. It has survived not only five centuries, but also t
-               "/>
+        <Label Margin="10" Grid.Row="2" Text="{Binding Description}"/>
        
        
         <!--Separator-->
