@@ -2,6 +2,8 @@ using Garten.ViewModels;
 using Garten.Views;
 using Prism;
 using Prism.Ioc;
+using Prism.Plugin.Popups;
+using Xamarin.Essentials;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 using Xamarin.Forms;
@@ -19,16 +21,26 @@ namespace Garten
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage");
+            if (!string.IsNullOrEmpty(Preferences.Get("myFirebaseRefreshToken", "")))
+            {
+                await NavigationService.NavigateAsync("NavigationPage/MainTabbedPage");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("NavigationPage/Login");
+            }
+
+
+            
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
-
+            //containerRegistry.RegisterSingleton<IAppInfo, AppInfoImplementation>();
+            containerRegistry.RegisterForNavigation<Login, LoginViewModel>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<Home, HomeViewModel>();
-            containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
+           
             containerRegistry.RegisterForNavigation<MyPosts, MyPostsViewModel>();
             containerRegistry.RegisterForNavigation<Posts, PostsViewModel>();
             containerRegistry.RegisterForNavigation<MyPostDetail, MyPostDetailViewModel>();
@@ -41,6 +53,9 @@ namespace Garten
             containerRegistry.RegisterForNavigation<Messages, MessagesViewModel>();
             containerRegistry.RegisterForNavigation<Account, AccountViewModel>();
             containerRegistry.RegisterForNavigation<ImagePopup, ImagePopupViewModel>();
+            containerRegistry.RegisterPopupNavigationService();
+
+            containerRegistry.RegisterForNavigation<Register, RegisterViewModel>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Garten.Interface;
+﻿using Firebase.Database;
+using Garten.Interface;
 using Garten.Model;
 using Garten.Services;
 using Prism.Commands;
@@ -16,6 +17,8 @@ namespace Garten.ViewModels
 {
     public class HomeViewModel : BindableBase
     {
+
+        FirebaseClient client;
         private string _PostsNumber;
         public string PostsNumber
         {
@@ -71,42 +74,15 @@ namespace Garten.ViewModels
         public DelegateCommand ShowAllPosts { get; set; }
         IEventAggregator _ea;
         INavigationService NavigationService;
+
+        //ctor
         public HomeViewModel(INavigationService navigationService )
         {
             NavigationService = navigationService;
+
+            client = new FirebaseClient("https://gardenservice-ec613-default-rtdb.firebaseio.com");
             getPostsData();
             
-            //Posts = new ObservableCollection<Post>
-            //{
-            //    new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-            //     new Post {Titel = "Post1 Titel" , Description = "post1 description" , image = "post3.png" , Price = 29},
-            //    new Post {Titel = "Post2 Titel" , Description = "post2 description" , image = "post2.jpg" , Price = 29},
-            //    new Post {Titel = "Post3 Titel" , Description = "post3 description" , image = "post3.jpg" , Price = 29},
-
-            //};
 
             PostsNumber = Posts.Count().ToString();
             ShowAllMyPosts = new DelegateCommand(ShowMyPosts);
@@ -114,8 +90,31 @@ namespace Garten.ViewModels
 
         }
 
-        private void getPostsData()
+
+        private IEnumerable<Post> _PostList;
+        public IEnumerable<Post> PostList
         {
+            get { return _PostList; }
+            set { SetProperty(ref _PostList, value); }
+        }
+
+        private async  void getPostsData()
+        {
+            //    PostList = (await client
+            //.Child("Posts")
+            //.OnceAsync<Post>())
+            //.Select(item =>
+            //     new Post
+            //     {
+            //         Titel = item.Object.Titel,
+            //         Price = item.Object.Price,
+            //         Location = item.Object.Location,
+            //         Description = item.Object.Description
+            //     });
+
+
+        
+
             PostService ps = new PostService();
             Posts = new ObservableCollection<Post>();
             Posts = ps.getPosts();

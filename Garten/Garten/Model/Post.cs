@@ -23,6 +23,6 @@ namespace Garten.Model
         public string PostId { get; set; }
 
         public string Time { get; set; }
-        public User User { get; set; }
+        public MyUser User { get; set; }
     }
 }

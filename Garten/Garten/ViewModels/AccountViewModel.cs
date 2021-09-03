@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Garten.ViewModels
@@ -15,6 +16,18 @@ namespace Garten.ViewModels
         {
             _nav = navigation;
         }
+
+
+        private DelegateCommand _Logout;
+        public DelegateCommand Logout =>
+        _Logout ?? (_Logout = new DelegateCommand(LogoutM));
+
+        async void LogoutM()
+        {
+            Preferences.Remove("myFirebaseRefreshToken");
+            await _nav.NavigateAsync("Login"); 
+        }
+
 
         private DelegateCommand _GoToMyPosts;
         public DelegateCommand GoToMyPosts =>

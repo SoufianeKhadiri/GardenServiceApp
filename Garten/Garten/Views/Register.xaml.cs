@@ -1,17 +1,13 @@
-﻿
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace Garten.Views
 {
-    public partial class MainPage
+    public partial class Register : ContentPage
     {
-        public MainPage()
+        public Register()
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();
-          
         }
-
-        
     }
 }

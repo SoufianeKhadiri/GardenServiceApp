@@ -63,7 +63,7 @@
             <Label Text="Logout" FontSize="18" HorizontalOptions="Center" VerticalOptions="Center"  Margin="10,0,0,0"/>
             
             <StackLayout.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding MyPosts}"/>
+                <TapGestureRecognizer Command="{Binding Logout}"/>
             </StackLayout.GestureRecognizers>
 
         </StackLayout>

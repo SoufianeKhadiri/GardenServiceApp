@@ -7,6 +7,7 @@ using Prism;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
+using Prism.Navigation;
 using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
@@ -74,8 +75,10 @@ namespace Garten.ViewModels
 
         PostService postService;
         //ctor
-        public AddPostViewModel(IEventAggregator ea)
+        INavigationService _nav;
+        public AddPostViewModel(IEventAggregator ea, INavigationService navigationService)
         {
+            _nav = navigationService;
             ea.GetEvent<TakeFoto>().Subscribe(TakeFotoFromCamera);
             ea.GetEvent<TakeFotoGalery>().Subscribe(TakeFotoFromGalery);
             Images = new ObservableCollection<MyImage>();
@@ -84,6 +87,7 @@ namespace Garten.ViewModels
             ImagesStream = new List<Stream>();
             postService = new PostService();
             InitPicker();
+
         }
 
         private void InitPicker()
@@ -101,7 +105,7 @@ namespace Garten.ViewModels
             int imageNumber = 0;
             foreach (var item in ImagesStream)
             {
-                imagesUrl.Add(await postService.UploadImage(item,  imageNumber.ToString(), Titel));
+                imagesUrl.Add(await postService.UploadImage(item,  imageNumber.ToString(), Titel , "Posts"));
                 imageNumber++;
             }
 
@@ -180,9 +184,11 @@ namespace Garten.ViewModels
         public DelegateCommand TakeFoto =>
         _TakeFoto ?? (_TakeFoto = new DelegateCommand(TakeFotoM));
 
-        void TakeFotoM()
+        async void TakeFotoM()
         {
-            PopupNavigation.Instance.PushAsync(new ImagePopup());
+            //await PopupNavigation.Instance.PushAsync(new ImagePopup());
+            await _nav.NavigateAsync("ImagePopup");
+            
 
         }
 

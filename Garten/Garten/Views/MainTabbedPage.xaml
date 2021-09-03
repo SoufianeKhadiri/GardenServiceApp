@@ -12,13 +12,13 @@
             android:TabbedPage.IsSmoothScrollEnabled="False"
             x:Class="Garten.Views.MainTabbedPage">
 
-    
-    <local:Home  Title="Home"   IconImageSource="baseline_home_black_24.png" />
+    <TabbedPage.Children>
+        <local:Home  Title="Home"   IconImageSource="baseline_home_black_24.png" />
     <local:Search Title="Search"  IconImageSource="baseline_search_black_24"/>
     <!--<local:MainPage  IconImageSource="{OnPlatform  Android=baseline_add_circle_24}" />-->
     <local:AddPost  Title="Add" IconImageSource="baseline_add_circle_black_48.png" />
     <local:Messages Title="Messages" IconImageSource="baseline_question_answer_black_24"/>
     <local:Account Title="Account" IconImageSource="baseline_person_black_24"/>
-  
+    </TabbedPage.Children>
 
 </TabbedPage>
